@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেজিস্ট্রেশন - বাংলাদেশ থিসিস আর্কাইভ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>বাংলাদেশ থিসিস আর্কাইভ</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">হোম</a></li>
+                <li><a href="login.html">লগইন</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-form">
+            <h2>নতুন অ্যাকাউন্ট তৈরি করুন</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">পূর্ণ নাম</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">ইমেইল</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">পাসওয়ার্ড</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="university">বিশ্ববিদ্যালয়</label>
+                    <select id="university" required>
+                        <option value="">-- নির্বাচন করুন --</option>
+                        <option value="du">ঢাকা বিশ্ববিদ্যালয়</option>
+                        <option value="ru">রাজশাহী বিশ্ববিদ্যালয়</option>
+                        <option value="cu">চট্টগ্রাম বিশ্ববিদ্যালয়</option>
+                        <option value="ju">জাহাঙ্গীরনগর বিশ্ববিদ্যালয়</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">বিভাগ</label>
+                    <input type="text" id="department" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentId">স্টুডেন্ট আইডি</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">রেজিস্টার করুন</button>
+            </form>
+            
+            <p class="auth-link">ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="login.html">লগইন করুন</a></p>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

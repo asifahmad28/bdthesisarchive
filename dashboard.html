@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ড্যাশবোর্ড - বাংলাদেশ থিসিস আর্কাইভ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>বাংলাদেশ থিসিস আর্কাইভ</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">হোম</a></li>
+                <li><a href="dashboard.html">ড্যাশবোর্ড</a></li>
+                <li><a href="upload.html">থিসিস আপলোড</a></li>
+                <li><a href="#" id="logoutBtn">লগআউট</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="sidebar">
+            <div class="profile-summary">
+                <div class="profile-pic">
+                    <img src="images/profile.jpg" alt="প্রোফাইল ছবি">
+                </div>
+                <h3 id="userName">ইউজারের নাম</h3>
+                <p id="userUniversity">বিশ্ববিদ্যালয়</p>
+                <p id="userDepartment">বিভাগ</p>
+            </div>
+            
+            <nav class="dashboard-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="active">আমার ড্যাশবোর্ড</a></li>
+                    <li><a href="upload.html">থিসিস আপলোড</a></li>
+                    <li><a href="#">আমার থিসিস</a></li>
+                    <li><a href="#">ডাউনলোড হিস্ট্রি</a></li>
+                    <li><a href="#">প্রোফাইল সেটিংস</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <h2>আমার ড্যাশবোর্ড</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>আপলোডকৃত থিসিস</h3>
+                    <p id="uploadedThesis">0</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>ডাউনলোড সংখ্যা</h3>
+                    <p id="totalDownloads">0</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>রেটিং</h3>
+                    <p id="userRating">0</p>
+                </div>
+            </div>
+            
+            <div class="recent-activity">
+                <h3>সাম্প্রতিক কার্যক্রম</h3>
+                <ul id="activityList">
+                    <!-- JavaScript দ্বারা অ্যাক্টিভিটি লোড হবে -->
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

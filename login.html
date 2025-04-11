@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন - বাংলাদেশ থিসিস আর্কাইভ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* লগইন পেজের জন্য অতিরিক্ত স্টাইল */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        .auth-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+        
+        .auth-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* রেস্পন্সিভ ডিজাইন */
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>বাংলাদেশ থিসিস আর্কাইভ</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">হোম</a></li>
+                <li><a href="register.html">রেজিস্টার</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-form">
+            <h2>অ্যাকাউন্টে লগইন করুন</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">ইমেইল</label>
+                    <input type="email" id="email" required placeholder="আপনার ইমেইল ঠিকানা লিখুন">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">পাসওয়ার্ড</label>
+                    <input type="password" id="password" required placeholder="আপনার পাসওয়ার্ড লিখুন">
+                </div>
+                
+                <button type="submit" class="submit-btn">লগইন করুন</button>
+                
+                <p class="auth-link">
+                    অ্যাকাউন্ট নেই? <a href="register.html">এখানে রেজিস্টার করুন</a>
+                </p>
+                
+                <p class="auth-link">
+                    <a href="forgot-password.html">পাসওয়ার্ড ভুলে গেছেন?</a>
+                </p>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 বাংলাদেশ থিসিস আর্কাইভ. সকল স্বত্ব সংরক্ষিত</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // লগইন ফর্ম হ্যান্ডলিং
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                // লোডিং স্টেট
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'লগইন হচ্ছে...';
+                
+                // API কল
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.message || 'লগইন ব্যর্থ হয়েছে');
+                }
+                
+                // সফল লগইন
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // ড্যাশবোর্ডে রিডাইরেক্ট
+                window.location.href = 'dashboard.html';
+                
+            } catch (error) {
+                alert(error.message);
+                console.error('লগইন এরর:', error);
+                
+                // বাটন রিসেট
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'লগইন করুন';
+            }
+        });
+        
+        // যদি ইতিমধ্যে লগইন করা থাকে
+        if (localStorage.getItem('token')) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
